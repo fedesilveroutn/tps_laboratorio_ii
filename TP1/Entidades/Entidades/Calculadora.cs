@@ -60,6 +60,16 @@ namespace Entidades
             this.numero = 0;
         }
     
+        public Operando(double numero)
+        {
+            this.numero = numero;
+        }
+
+        public Operando(string strNumero)
+        {
+            this.Numero = strNumero;
+        }
+
         
 
         //PROPIEDADES
@@ -69,7 +79,7 @@ namespace Entidades
             {
                 if(ValidarOperando(value) != 0)
                 {
-                    this.Numero = value;
+                    this.numero = double.Parse(value);
                 }
 
             }
@@ -83,21 +93,27 @@ namespace Entidades
         {
             double ret = 0;
 
-            if(double.TryParse(strNumero, out ret) == true)
+            
+
+            if (double.TryParse(strNumero, out ret) == true)
             {
                 ret = double.Parse(strNumero);
             }
+
             return ret;
         }
 
 
+        //VER PORQUE SIEMPRE ARROJA FALSE Y NO REALIZA BIEN LA VALIDACION
         private bool EsBinario(string binario)
         {
             bool ret = true;
+            double aux;
 
             for(int i = 0; i < binario.Length; i++)
             {
-                if(binario[i] != '0' || binario[i] != '1')
+                aux = Char.GetNumericValue(binario[i]);
+                if (aux != 0 && aux != 1)
                 {
                     ret = false;
                     break;
@@ -106,7 +122,8 @@ namespace Entidades
             return ret;
         }
     
-    
+        //EL PROBLEMA ES EL MISMO QUE ESBINARIO; TOMA EL VALOR ASCII
+        //USAR CHAR.GETNUMERICVALUE()
         public string BinarioDecimal(string binario)
         {
             int digito;
@@ -117,9 +134,9 @@ namespace Entidades
 
             if (EsBinario(binario) == true)
             {                       
-                for(int i = binario.Length - 1; i >= 0 ; i--)
+                for(int i = binario.Length - 1; i >= 0 ; i--) //CONTROLAR QUE LENGTH SEA OK
                 {
-                    digito = Math.Abs((int)binario[i]);
+                    digito = Math.Abs((int)Char.GetNumericValue(binario[i]));
                     potencia = Math.Abs((int)Math.Pow(2, i));
                     calculo = digito * potencia;
                     numeroDecimal += calculo;
