@@ -5,19 +5,6 @@ namespace Entidades
 {
     public static class Calculadora
     {
-        private static char ValidarOperador(char operador)
-        {
-            if(operador == '+' || operador == '-' || operador == '/' || operador == '*')
-            {
-                return operador;
-            }
-            else
-            {
-                return '+';
-            }
-        }
-
-        
         public static double Operar(Operando num1, Operando num2, char operador)
         {
             char operadorValidado;
@@ -44,35 +31,25 @@ namespace Entidades
             }
             return resultado;
         }
+        private static char ValidarOperador(char operador)
+        {
+            if(operador == '+' || operador == '-' || operador == '/' || operador == '*')
+            {
+                return operador;
+            }
+            else
+            {
+                return '+';
+            }
+        }
     }
 
 
 
     public class Operando
     {
-        //CAMPOS
         private double numero;
 
-
-        //CONSTRUCTOR
-        public Operando()
-        {
-            this.numero = 0;
-        }
-    
-        public Operando(double numero)
-        {
-            this.numero = numero;
-        }
-
-        public Operando(string strNumero)
-        {
-            this.Numero = strNumero;
-        }
-
-        
-
-        //PROPIEDADES
         private string Numero
         {
             set
@@ -85,44 +62,6 @@ namespace Entidades
             }
         }
 
-
-
-
-        //METODOS
-        private double ValidarOperando(string strNumero)
-        {
-            double ret = 0;
-
-            
-
-            if (double.TryParse(strNumero, out ret) == true)
-            {
-                ret = double.Parse(strNumero);
-            }
-
-            return ret;
-        }
-
-
-        
-        private bool EsBinario(string binario)
-        {
-            bool ret = true;
-            double aux;
-
-            for(int i = 0; i < binario.Length; i++)
-            {
-                aux = Char.GetNumericValue(binario[i]);
-                if (aux != 0 && aux != 1)
-                {
-                    ret = false;
-                    break;
-                }
-            }
-            return ret;
-        }
-    
-        
         public string BinarioDecimal(string binario)
         {
             int posicion;
@@ -153,8 +92,6 @@ namespace Entidades
             return ret;
         }
 
-
-       
         public string DecimalBinario(double numero)
         {
             StringBuilder cadenaDesordenada = new StringBuilder();
@@ -193,8 +130,6 @@ namespace Entidades
             return ret;
         }
 
-
-        
         public string DecimalBinario(string numero)
         {
             double numeroValidado;
@@ -212,10 +147,37 @@ namespace Entidades
             return ret;
         }
 
+        private bool EsBinario(string binario)
+        {
+            bool ret = true;
+            double aux;
 
+            for(int i = 0; i < binario.Length; i++)
+            {
+                aux = Char.GetNumericValue(binario[i]);
+                if (aux != 0 && aux != 1)
+                {
+                    ret = false;
+                    break;
+                }
+            }
+            return ret;
+        }
 
+        public Operando()
+        {
+            this.numero = 0;
+        }
+    
+        public Operando(double numero)
+        {
+            this.numero = numero;
+        }
 
-        //SOBRECARGA DE OPERADORES
+        public Operando(string strNumero)
+        {
+            this.Numero = strNumero;
+        }
 
         public static double operator - (Operando n1, Operando n2)
         {
@@ -246,5 +208,20 @@ namespace Entidades
         {
             return n1.numero + n2.numero;
         }
+
+        private double ValidarOperando(string strNumero)
+        {
+            double ret = 0;
+
+            
+
+            if (double.TryParse(strNumero, out ret) == true)
+            {
+                ret = double.Parse(strNumero);
+            }
+
+            return ret;
+        }
+    
     }
 }

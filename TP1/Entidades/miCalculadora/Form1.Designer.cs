@@ -63,7 +63,7 @@
             this.txtNumero1.Name = "txtNumero1";
             this.txtNumero1.Size = new System.Drawing.Size(122, 39);
             this.txtNumero1.TabIndex = 0;
-            this.txtNumero1.TextChanged += new System.EventHandler(this.txtNumero1_TextChanged);
+            
             // 
             // txtNumero2
             // 
@@ -132,7 +132,7 @@
             this.lstOperaciones.Name = "lstOperaciones";
             this.lstOperaciones.Size = new System.Drawing.Size(189, 199);
             this.lstOperaciones.TabIndex = 4;
-            this.lstOperaciones.SelectedIndexChanged += new System.EventHandler(this.lstOperaciones_SelectedIndexChanged);
+           
             // 
             // lblResultado
             // 

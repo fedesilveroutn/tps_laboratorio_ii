@@ -14,73 +14,6 @@ namespace miCalculadora
 {
     public partial class FormCalculadora : Form
     {
-        public FormCalculadora()
-        {
-            InitializeComponent();
-        }
-
-        private void FormCalculadora_Load(object sender, EventArgs e)
-        {
-            this.Limpiar();
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            this.Limpiar();
-        }
-
-
-        //METODOS PROPIOS
-        private void Limpiar()
-        {
-            this.txtNumero1.Text = "";
-            this.cmbOperador.Text = "";
-            this.txtNumero2.Text = "";
-            this.lblResultado.Text = "";
-            this.lstOperaciones.Items.Clear();
-        }
-
-        private static double Operar(string numero1, string numero2, string operador)
-        {
-            Operando operando1 = new Operando(numero1);
-            Operando operando2 = new Operando(numero2);
-            
-            return Calculadora.Operar(operando1, operando2, operador[0]);
-        }
-
-        private void btnOperar_Click(object sender, EventArgs e)
-        {
-            StringBuilder listaOperaciones = new StringBuilder();
-            double resultado;
-
-            if (this.cmbOperador.Text != "")
-            {
-                resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text);
-                this.lblResultado.Text = resultado.ToString();
-
-                listaOperaciones.Append(this.txtNumero1.Text + " " +
-                                        this.cmbOperador.Text + " " +
-                                        this.txtNumero2.Text + " = " +
-                                        resultado.ToString());
-
-                this.lstOperaciones.Items.Add(listaOperaciones.ToString());
-            }
-        }
-
-
-
-
-
-        private void txtNumero1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lstOperaciones_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             DialogResult respuesta;
@@ -116,5 +49,57 @@ namespace miCalculadora
                 this.lblResultado.Text = resultadoEnDecimal;
             }
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+        }
+       
+        private static double Operar(string numero1, string numero2, string operador)
+        {
+            Operando operando1 = new Operando(numero1);
+            Operando operando2 = new Operando(numero2);
+            
+            return Calculadora.Operar(operando1, operando2, operador[0]);
+        }
+        
+        private void FormCalculadora_Load(object sender, EventArgs e)
+        {
+            this.Limpiar();
+        }
+        
+        public FormCalculadora()
+        {
+            InitializeComponent();
+        }
+
+        private void Limpiar()
+        {
+            this.txtNumero1.Text = "";
+            this.cmbOperador.Text = "";
+            this.txtNumero2.Text = "";
+            this.lblResultado.Text = "";
+            this.lstOperaciones.Items.Clear();
+        }
+
+        private void btnOperar_Click(object sender, EventArgs e)
+        {
+            StringBuilder listaOperaciones = new StringBuilder();
+            double resultado;
+
+            if (this.cmbOperador.Text != "")
+            {
+                resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text);
+                this.lblResultado.Text = resultado.ToString();
+
+                listaOperaciones.Append(this.txtNumero1.Text + " " +
+                                        this.cmbOperador.Text + " " +
+                                        this.txtNumero2.Text + " = " +
+                                        resultado.ToString());
+
+                this.lstOperaciones.Items.Add(listaOperaciones.ToString());
+            }
+        }
+
     }
 }
