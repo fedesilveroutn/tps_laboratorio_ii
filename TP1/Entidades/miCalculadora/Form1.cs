@@ -30,15 +30,22 @@ namespace miCalculadora
             Operando operando = new Operando();      
             string resultadoEnBinario;
            
-            if(this.lblResultado.Text != "" && this.lblResultado.Text[0] != '-')
-            {
-                resultadoEnBinario = operando.DecimalBinario(this.lblResultado.Text);
-                this.lblResultado.Text = resultadoEnBinario;
+            if(this.lblResultado.Text.Length < 12)
+            { 
+                if(this.lblResultado.Text != "" && this.lblResultado.Text[0] != '-')
+                {
+                    resultadoEnBinario = operando.DecimalBinario(this.lblResultado.Text);
+                    this.lblResultado.Text = resultadoEnBinario;
                 
+                }
+                else
+                {
+                    MessageBox.Show("Solo es posible convertir numeros enteros.", "Error");
+                }
             }
             else
             {
-                MessageBox.Show("Solo es posible convertir numeros enteros.", "Error");
+                MessageBox.Show("No se puede convertir un numero tan grande.", "Error");
             }
         }
 
