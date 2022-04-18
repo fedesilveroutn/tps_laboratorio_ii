@@ -101,7 +101,7 @@ namespace Entidades
             int cociente;
             int resto;
 
-            if (numero > 0)
+            if (numero > -1)
             {
                 cociente = Math.Abs((int)numero);
                 do

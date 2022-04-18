@@ -29,11 +29,16 @@ namespace miCalculadora
         {
             Operando operando = new Operando();      
             string resultadoEnBinario;
-
-            if(this.lblResultado.Text != "")
+           
+            if(this.lblResultado.Text != "" && this.lblResultado.Text[0] != '-')
             {
                 resultadoEnBinario = operando.DecimalBinario(this.lblResultado.Text);
                 this.lblResultado.Text = resultadoEnBinario;
+                
+            }
+            else
+            {
+                MessageBox.Show("Solo es posible convertir numeros enteros.", "Error");
             }
         }
 
@@ -46,7 +51,15 @@ namespace miCalculadora
             if(this.lblResultado.Text != "")
             {
                 resultadoEnDecimal = operando.BinarioDecimal(resultadoAConvertir);
-                this.lblResultado.Text = resultadoEnDecimal;
+                if (resultadoEnDecimal != "Valor inválido") 
+                {
+                    this.lblResultado.Text = resultadoEnDecimal;
+                }
+                else
+                {
+                    this.lblResultado.Text = resultadoEnDecimal;
+                    MessageBox.Show("Solo se permite convertir numeros binarios.", "Error");
+                }
             }
         }
 
@@ -87,17 +100,24 @@ namespace miCalculadora
             StringBuilder listaOperaciones = new StringBuilder();
             double resultado;
 
-            if (this.cmbOperador.Text != "")
+            if (this.cmbOperador.Text != "" && this.txtNumero1.Text != "" && this.txtNumero2.Text != "")
             {
-                resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text);
-                this.lblResultado.Text = resultado.ToString();
+                if (double.TryParse(txtNumero1.Text, out double r1) == true && double.TryParse(txtNumero2.Text, out double r2) == true) 
+                {
+                    resultado = FormCalculadora.Operar(this.txtNumero1.Text, this.txtNumero2.Text, this.cmbOperador.Text);
+                    this.lblResultado.Text = resultado.ToString();
 
-                listaOperaciones.Append(this.txtNumero1.Text + " " +
-                                        this.cmbOperador.Text + " " +
-                                        this.txtNumero2.Text + " = " +
-                                        resultado.ToString());
+                    listaOperaciones.Append(this.txtNumero1.Text + " " +
+                                            this.cmbOperador.Text + " " +
+                                            this.txtNumero2.Text + " = " +
+                                            resultado.ToString());
 
-                this.lstOperaciones.Items.Add(listaOperaciones.ToString());
+                    this.lstOperaciones.Items.Add(listaOperaciones.ToString());              
+                }
+                else
+                {
+                    MessageBox.Show("Valor inválido. Solo se aceptan numeros decimales.", "Error");
+                }          
             }
         }
 
