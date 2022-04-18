@@ -154,45 +154,37 @@ namespace Entidades
         }
 
 
-        //EL PROBLEMA DE LA CONVERSION ESTA ACA
-        //VER COMO INVERTIR LA CADENA
+       
         public string DecimalBinario(double numero)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder cadenaDesordenada = new StringBuilder();
+            StringBuilder cadenaOrdenada = new StringBuilder();
             string aux;
             string ret;
             int cociente;
             int resto;
-            char caracterAux;
-            StringBuilder cadenaOrdenada = new StringBuilder();
 
             if (numero > 0)
             {
                 cociente = Math.Abs((int)numero);
                 do
                 {
-                    resto = cociente % 2;                  
-                    sb.Append(resto);
+                    resto = cociente % 2;
+                    cadenaDesordenada.Append(resto);
                     cociente = cociente / 2;
                     if(cociente < 2)
                     {
-                        sb.Append(cociente);
+                        cadenaDesordenada.Append(cociente);
                     }
+
                 } while (cociente > 1);
 
-                aux = sb.ToString();    
+                aux = cadenaDesordenada.ToString();
                 for(int i = aux.Length - 1; i >= 0 ; i--)
                 {
-                    caracterAux = aux[i];
-                    cadenaOrdenada.Append(caracterAux);
+                    cadenaOrdenada.Append(aux[i]);
                 }
                 ret = cadenaOrdenada.ToString();
-
-
-
-
-
-                //ret = sb.ToString(); 
             }
             else
             {
