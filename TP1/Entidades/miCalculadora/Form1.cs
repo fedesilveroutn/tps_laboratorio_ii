@@ -83,21 +83,23 @@ namespace miCalculadora
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            //REVISAR
-            MessageBox.Show("¿Está seguro que desea salir ?");
-            this.Close();
+            DialogResult respuesta;
+
+            respuesta = MessageBox.Show("¿Está seguro que desea salir ?", "Salir", MessageBoxButtons.YesNo);
+            if (respuesta == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
 
         private void btnConvertirABinario_Click(object sender, EventArgs e)
         {
-            Operando operando = new Operando();
-            double resultadoAConvertir;
+            Operando operando = new Operando();      
             string resultadoEnBinario;
 
             if(this.lblResultado.Text != "")
             {
-                resultadoAConvertir = double.Parse(this.lblResultado.Text);
-                resultadoEnBinario = operando.DecimalBinario(resultadoAConvertir);
+                resultadoEnBinario = operando.DecimalBinario(this.lblResultado.Text);
                 this.lblResultado.Text = resultadoEnBinario;
             }
         }
