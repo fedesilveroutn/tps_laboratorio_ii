@@ -14,6 +14,12 @@ namespace miCalculadora
 {
     public partial class FormCalculadora : Form
     {
+        /// <summary>
+        /// Muestra un cuadro de si o no al hacer click en cerrar, de ser positivo cierra el formulario
+        /// sino continua su ejecucion
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             DialogResult respuesta;
@@ -24,7 +30,11 @@ namespace miCalculadora
                 this.Close();
             }
         }
-
+        /// <summary>
+        /// Al hacer click se llama al metodo que convierte un numero decimal a binario
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         private void btnConvertirABinario_Click(object sender, EventArgs e)
         {
             Operando operando = new Operando();      
@@ -35,8 +45,7 @@ namespace miCalculadora
                 if(this.lblResultado.Text != "" && this.lblResultado.Text[0] != '-')
                 {
                     resultadoEnBinario = operando.DecimalBinario(this.lblResultado.Text);
-                    this.lblResultado.Text = resultadoEnBinario;
-                
+                    this.lblResultado.Text = resultadoEnBinario;              
                 }
                 else
                 {
@@ -48,7 +57,11 @@ namespace miCalculadora
                 MessageBox.Show("No se puede convertir un numero tan grande.", "Error");
             }
         }
-
+        /// <summary>
+        /// Cuando se clikea sobre este boton se llama al metodo que convierte un numero binario a decimal
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         private void btnConvertirADecimal_Click(object sender, EventArgs e)
         {
             Operando operando = new Operando();
@@ -69,12 +82,22 @@ namespace miCalculadora
                 }
             }
         }
-
+        /// <summary>
+        /// Limpia los valores guardados en ambos textbox, el combobox y el listbox
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
         }
-       
+       /// <summary>
+       /// Invoca al metodo Operar de la clase Calculadora y realiza la operacion solicitada
+       /// </summary>
+       /// <param name="numero1">Recibe un tipo de dato string</param>
+       /// <param name="numero2">Recibe un tipo de dato string</param>
+       /// <param name="operador">Recibe un tipo de dato string</param>
+       /// <returns>Retorna el resultado del metodo Operar correspondiente a Calculadora</returns>
         private static double Operar(string numero1, string numero2, string operador)
         {
             Operando operando1 = new Operando(numero1);
@@ -82,17 +105,25 @@ namespace miCalculadora
             
             return Calculadora.Operar(operando1, operando2, operador[0]);
         }
-        
+        /// <summary>
+        /// Se encarga de cargar el formulario
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         private void FormCalculadora_Load(object sender, EventArgs e)
         {
             this.Limpiar();
         }
-        
+        /// <summary>
+        /// Inicializa los componenetes
+        /// </summary>
         public FormCalculadora()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Se encarga de resetear los valores de los componentes
+        /// </summary>
         private void Limpiar()
         {
             this.txtNumero1.Text = "";
@@ -101,7 +132,11 @@ namespace miCalculadora
             this.lblResultado.Text = "";
             this.lstOperaciones.Items.Clear();
         }
-
+        /// <summary>
+        /// Valida que el contenido de las textbox y combobox y si es correcto, llama al metodo Operar 
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
         private void btnOperar_Click(object sender, EventArgs e)
         {
             StringBuilder listaOperaciones = new StringBuilder();
