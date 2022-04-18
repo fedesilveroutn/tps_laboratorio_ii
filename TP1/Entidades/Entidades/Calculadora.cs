@@ -5,6 +5,13 @@ namespace Entidades
 {
     public static class Calculadora
     {
+        /// <summary>
+        /// Realiza la operacion indicada entre los dos objetos del tipo Operando
+        /// </summary>
+        /// <param name="num1">Recibe el primer objeto de tipo Operando </param>
+        /// <param name="num2">Recibe el segundo objeto de tipo Operando</param>
+        /// <param name="operador">Recibe el operador correspondiente a la cuenta a realizar</param>
+        /// <returns>Retorna el resultado de la cuenta si todo salio bien y sino doble.MinValue</returns>
         public static double Operar(Operando num1, Operando num2, char operador)
         {
             char operadorValidado;
@@ -31,6 +38,11 @@ namespace Entidades
             }
             return resultado;
         }
+        /// <summary>
+        /// Valida que el operador sea + || - || / || *
+        /// </summary>
+        /// <param name="operador">Recibe un char</param>
+        /// <returns>De ser correcto retorna el mismo operador, sino el operador suma</returns>
         private static char ValidarOperador(char operador)
         {
             if(operador == '+' || operador == '-' || operador == '/' || operador == '*')
@@ -49,7 +61,7 @@ namespace Entidades
     public class Operando
     {
         private double numero;
-
+   
         private string Numero
         {
             set
@@ -62,6 +74,11 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Convierte de binario a decimal el numero que se le pasa como argumento 
+        /// </summary>
+        /// <param name="binario">Recibe un tipo de dato string</param>
+        /// <returns>Retorna un string que representa el numero decimal o "Valor invalido"</returns>
         public string BinarioDecimal(string binario)
         {
             int posicion;
@@ -91,7 +108,11 @@ namespace Entidades
 
             return ret;
         }
-
+        /// <summary>
+        /// Convierte de decimal a binario el numero que se le pasa como argumento
+        /// </summary>
+        /// <param name="numero">Recibe un tipo de dato double</param>
+        /// <returns>Retorna un string que representa la conversion exitosa o "Valor invalido"</returns>
         public string DecimalBinario(double numero)
         {
             StringBuilder cadenaDesordenada = new StringBuilder();
@@ -129,7 +150,11 @@ namespace Entidades
             }
             return ret;
         }
-
+        /// <summary>
+        /// Convierte de decimal a binario el numero que representa el string pasado como argumento
+        /// </summary>
+        /// <param name="numero">Recibe un tipo de dato string</param>
+        /// <returns>Retorna la representacion exitosa de la conversion o "Valor invalido"</returns>
         public string DecimalBinario(string numero)
         {
             double numeroValidado;
@@ -146,7 +171,11 @@ namespace Entidades
             }
             return ret;
         }
-
+        /// <summary>
+        /// Valida que el string pasado como argumento represente un numero binario
+        /// </summary>
+        /// <param name="binario">Recibe un tipo de dato string</param>
+        /// <returns>Retorna true si es binario o false si algun caracter del string no es 0 o 1</returns>
         private bool EsBinario(string binario)
         {
             bool ret = true;
@@ -163,32 +192,55 @@ namespace Entidades
             }
             return ret;
         }
-
+        /// <summary>
+        /// Es el constructor por defecto, inicializa el campo numero en 0
+        /// </summary>
         public Operando()
         {
             this.numero = 0;
         }
-    
+        /// <summary>
+        /// Sobrecarga del constructor que inicializa el campo numero con el double pasado como argumento
+        /// </summary>
+        /// <param name="numero">Recibe un tipo de dato double</param>
         public Operando(double numero)
         {
             this.numero = numero;
         }
-
+        /// <summary>
+        /// Sobrecarga del constructor que inicializa la propiedad Numero con el string pasado como argumento 
+        /// </summary>
+        /// <param name="strNumero">Recibe un tipo de dato string</param>
         public Operando(string strNumero)
         {
             this.Numero = strNumero;
         }
-
+        /// <summary>
+        /// Sobrecarga del operador '-', realiza la resta entre dos objetos Operadores
+        /// </summary>
+        /// <param name="n1">Recibe un tipo de dato Operando</param>
+        /// <param name="n2">Recibe un tipo de dato Operando</param>
+        /// <returns>Retorna el resultado de la resta entre n1 y n2</returns>
         public static double operator - (Operando n1, Operando n2)
         {
             return n1.numero - n2.numero;   
         }
-
+        /// <summary>
+        /// Sobrecarga del operador '*', realiza la multiplicacion entre dos objetos tipo Operando
+        /// </summary>
+        /// <param name="n1">Recibe un tipo de dato Operando</param>
+        /// <param name="n2">Recibe un tipo de dato Operando</param>
+        /// <returns>Retorna la multiplicacion entre n1 y n2</returns>
         public static double operator * (Operando n1, Operando n2)
         {
             return n1.numero * n2.numero;
         }
-
+        /// <summary>
+        /// Sobrecarga del operador '/', realiza la division entre dos objetos de tipo Operando
+        /// </summary>
+        /// <param name="n1">Recibe un objeto de tipo Operando</param>
+        /// <param name="n2">Recibe un objeto de tipo Operando</param>
+        /// <returns>Retorna la division entre n1 y n2, o double.MinValue si n2 es 0</returns>
         public static double operator / (Operando n1, Operando n2)
         {
             double resultado;
@@ -203,17 +255,24 @@ namespace Entidades
             }
             return resultado;
         }
-
+        /// <summary>
+        /// Sobrecarga del operador '+', realiza la suma entre dos objetos de tipo Operando
+        /// </summary>
+        /// <param name="n1">Recibe un objeto de tipo Operando</param>
+        /// <param name="n2">Recibe un objeto de tipo Operando</param>
+        /// <returns>Retorna la suma entre n1 y n2</returns>
         public static double operator + (Operando n1, Operando n2)
         {
             return n1.numero + n2.numero;
         }
-
+        /// <summary>
+        /// Comprobará que el valor recibido sea numérico, y lo retornará en formato double. 
+        /// </summary>
+        /// <param name="strNumero"></param>
+        /// <returns>Retorna el valor numerico en double o 0 si no es numerico</returns>
         private double ValidarOperando(string strNumero)
         {
-            double ret = 0;
-
-            
+            double ret = 0;          
 
             if (double.TryParse(strNumero, out ret) == true)
             {
