@@ -104,7 +104,7 @@ namespace Entidades
         }
 
 
-        //VER PORQUE SIEMPRE ARROJA FALSE Y NO REALIZA BIEN LA VALIDACION
+        
         private bool EsBinario(string binario)
         {
             bool ret = true;
@@ -122,10 +122,10 @@ namespace Entidades
             return ret;
         }
     
-        //EL PROBLEMA ES EL MISMO QUE ESBINARIO; TOMA EL VALOR ASCII
-        //USAR CHAR.GETNUMERICVALUE()
+        
         public string BinarioDecimal(string binario)
         {
+            int posicion;
             int digito;
             int potencia;
             int calculo;
@@ -133,13 +133,15 @@ namespace Entidades
             string ret;
 
             if (EsBinario(binario) == true)
-            {                       
-                for(int i = binario.Length - 1; i >= 0 ; i--) //CONTROLAR QUE LENGTH SEA OK
+            {
+                posicion = binario.Length - 1;
+                for(int i = 0; i < binario.Length; i++) 
                 {
                     digito = Math.Abs((int)Char.GetNumericValue(binario[i]));
-                    potencia = Math.Abs((int)Math.Pow(2, i));
+                    potencia = Math.Abs((int)Math.Pow(2, posicion));
                     calculo = digito * potencia;
                     numeroDecimal += calculo;
+                    posicion--;
                 }
                 ret = numeroDecimal.ToString();
             }
@@ -150,24 +152,47 @@ namespace Entidades
 
             return ret;
         }
-    
+
+
+        //EL PROBLEMA DE LA CONVERSION ESTA ACA
+        //VER COMO INVERTIR LA CADENA
         public string DecimalBinario(double numero)
         {
             StringBuilder sb = new StringBuilder();
+            string aux;
             string ret;
-            int valorAbsoluto;
+            int cociente;
             int resto;
+            char caracterAux;
+            StringBuilder cadenaOrdenada = new StringBuilder();
 
             if (numero > 0)
             {
-                valorAbsoluto = Math.Abs((int)numero);
-                for (int i = valorAbsoluto; i > 1; i--)
+                cociente = Math.Abs((int)numero);
+                do
                 {
-                    resto = i % 2;
-                    sb.Append(resto.ToString());
-                    i = i / 2;
+                    resto = cociente % 2;                  
+                    sb.Append(resto);
+                    cociente = cociente / 2;
+                    if(cociente < 2)
+                    {
+                        sb.Append(cociente);
+                    }
+                } while (cociente > 1);
+
+                aux = sb.ToString();    
+                for(int i = aux.Length - 1; i >= 0 ; i--)
+                {
+                    caracterAux = aux[i];
+                    cadenaOrdenada.Append(caracterAux);
                 }
-                ret = sb.ToString();
+                ret = cadenaOrdenada.ToString();
+
+
+
+
+
+                //ret = sb.ToString(); 
             }
             else
             {
