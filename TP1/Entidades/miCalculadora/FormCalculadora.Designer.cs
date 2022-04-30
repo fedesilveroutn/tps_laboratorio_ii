@@ -63,7 +63,6 @@
             this.txtNumero1.Name = "txtNumero1";
             this.txtNumero1.Size = new System.Drawing.Size(122, 39);
             this.txtNumero1.TabIndex = 0;
-            
             // 
             // txtNumero2
             // 
@@ -132,7 +131,6 @@
             this.lstOperaciones.Name = "lstOperaciones";
             this.lstOperaciones.Size = new System.Drawing.Size(189, 199);
             this.lstOperaciones.TabIndex = 4;
-           
             // 
             // lblResultado
             // 
@@ -164,6 +162,7 @@
             this.Name = "FormCalculadora";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calculadora de Federico Elías Silvero del curso 2°C";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCalculadora_FormClosing);
             this.Load += new System.EventHandler(this.FormCalculadora_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

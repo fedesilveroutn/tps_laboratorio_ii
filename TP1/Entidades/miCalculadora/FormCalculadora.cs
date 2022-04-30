@@ -15,20 +15,14 @@ namespace miCalculadora
     public partial class FormCalculadora : Form
     {
         /// <summary>
-        /// Muestra un cuadro de si o no al hacer click en cerrar, de ser positivo cierra el formulario
+        /// Invoca al FormClosing
         /// sino continua su ejecucion
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">EventArgs</param>
         private void btnCerrar_Click(object sender, EventArgs e)
         {
-            DialogResult respuesta;
-
-            respuesta = MessageBox.Show("¿Está seguro que desea salir ?", "Salir", MessageBoxButtons.YesNo);
-            if (respuesta == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            this.Close();
         }
         /// <summary>
         /// Al hacer click se llama al metodo que convierte un numero decimal a binario
@@ -162,6 +156,17 @@ namespace miCalculadora
                 }          
             }
         }
-
+        /// <summary>
+        /// Pregunta al usuario si realmente quiere salir, caso negativo cancela el cierre del form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormCalculadora_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("¿Está seguro que desea salir?", "Salir", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            } 
+        }
     }
 }
